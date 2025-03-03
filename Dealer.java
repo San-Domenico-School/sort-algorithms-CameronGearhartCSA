@@ -70,27 +70,54 @@ public class Dealer extends Actor
     **/
     
     /* In this space write the pseudocode for your selection sort
-     * 
-     * 
+     * for each iteration:
+     * Store the first unsorted element of the array under a variable n
+     * for each unsorted element, see if it less than n. If it is, store it as x and replace its position in the array with x.
+     * add x in between the last sorted element and the first unsorted element. 
      * 
      */
     private Card[] selectionSort(Card[] arr, int n)
     {
         //put sort algorithm here
+        for (int i=0; i<arr.length; i++)
+        {
+            int indexOfLargestCard = i;
+            Card switchStorage;
+            for (int x = 0 + i; x < arr.length; x++)
+            {
+                if (arr[indexOfLargestCard].getValue() > arr[x].getValue())
+                {
+                    indexOfLargestCard = x;
+                }
+            }
+            switchStorage = arr[i];
+            arr[i] = arr[indexOfLargestCard];
+            arr[indexOfLargestCard] = switchStorage;
+        }
         
         return selectionSort;
     }
     
     /* In this space write the pseudocode for your insertion sort
-     * 
+     * for each element aside from the first, compare it 
      * 
      * 
      */
     private Card[] insertionSort(Card[] arr, int n)
     {
-        
-        //put sort algorithm here
-        
+        Card temp;
+        for (int i = 1; i < arr.length; i++)
+        {
+            for (int x = i; x >= 1; x--)
+            {
+                if (arr[x].getValue() < arr[x-1].getValue())
+                {
+                    temp = arr[x-1];
+                    arr[x-1] = arr[x];
+                    arr[x] = temp;
+                }
+            }
+        }
         return insertionSort;
     }
     
