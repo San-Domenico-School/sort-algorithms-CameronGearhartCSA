@@ -130,8 +130,72 @@ public class Dealer extends Actor
      {
         
         //put sort algorithm here
+        Card[] newArray = new Card[arr.length];
+        if (arr.length <= 1)
+        {
+            return arr;
+        }
         
-        return mergeSort;
+        int midpoint = arr.length/2;
+        Card[] leftHalf = copyValues(arr, 0, midpoint);
+        Card[] rightHalf = copyValues(arr, midpoint, arr.length);
+        
+        leftHalf = mergeSort(leftHalf, 0);
+        rightHalf = mergeSort(rightHalf,0);
+        
+        newArray = merge(leftHalf, rightHalf);
+        
+        return newArray;
+    }
+    
+    private Card[] merge(Card[] leftArray, Card[] rightArray)
+    {
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        Card[] tempArray = new Card[leftArray.length + rightArray.length];
+        while(i < leftArray.length && j < rightArray.length)
+        {
+            if (leftArray[i].getValue() < rightArray[j].getValue())
+            {
+                tempArray[k] = leftArray[i];
+                i++;
+            }
+            else
+            {
+                tempArray[k] = rightArray[j]; 
+                j++;
+            }
+            k++;
+        }
+        
+        while(i < leftArray.length)
+        {
+             tempArray[k] = leftArray[i];
+             i++;
+             k++;
+        }
+        
+        while(j < rightArray.length)
+        {
+             tempArray[k] = rightArray[j];
+             j++;
+             k++;
+        }
+        return tempArray;
+    }
+    
+    private Card[] copyValues(Card[] arr, int a, int b)
+    {
+        Card[] newArr = new Card[b-a];
+        int k = 0;
+        while (a < b)
+        {
+            newArr[k] = arr[a];
+            a++;
+            k++;
+        }
+        return newArr;
     }
 }
 
